@@ -1,0 +1,143 @@
+#! /usr/bin/env python
+
+""" Copyright 2017 Akamai Technologies, Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+ ************************************************************************
+ *  Media Services CLI module by Achuthananda M P (apadmana@akamai.com) & Suhas Bharadwaj (sbharadw@akamai.com)*
+ ************************************************************************
+
+"""
+# Libraries commmon to python 2 and 3
+from __future__ import print_function
+from outputformat import *
+from endpointdef import *
+import sys
+import os
+import logging
+import random
+import re
+import requests
+import json
+import urllib
+import texttable as tt
+from future import standard_library
+from future.builtins import next
+from future.builtins import object
+from http_calls import EdgeGridHttpCaller
+from akamai.edgegrid import EdgeGridAuth
+from config import EdgeGridConfig
+from subprocess import call
+standard_library.install_aliases()
+
+if sys.version_info[0] >= 3:
+     # python3
+    from urllib.parse import urljoin
+else:
+     # python2.7
+    from urlparse import urljoin
+
+
+def main():
+    """ Processes the right command (list-configs, get-configs, acknowledge-cidrs) """
+    if config.command == "streams":
+        if hasattr(config, 'accountSwitchKey'):
+            streamList = listStreams(config.accountSwitchKey)
+        else:
+            streamList = listStreams()
+        formatOutputStreamList(streamList, config.output_type)
+
+    if config.command == "live-origins":
+        if hasattr(config, 'accountSwitchKey'):
+            liveOriginList = listLiveOrigins(config.accountSwitchKey)
+        else:
+            liveOriginList = listLiveOrigins()
+        formatOutputLiveOriginList(liveOriginList, config.output_type)
+
+    elif config.command == "get-stream":
+        if hasattr(config, 'accountSwitchKey'):
+            streamInfo = getStream(config.accountSwitchKey, config.streamid)
+        else:
+            streamInfo = getStream(config.streamid)
+        formatOutputGetStream(streamInfo, config.output_type)
+
+    elif config.command == "get-liveorigin":
+        if hasattr(config, 'accountSwitchKey'):
+            originInfo = getOrigin(config.accountSwitchKey, config.originid)
+        else:
+            originInfo = getOrigin(config.originid)
+        formatOutputOrigin(originInfo, config.output_type)
+
+    elif config.command == "cpcodes-liveorigin":
+        if hasattr(config, 'accountSwitchKey'):
+            cpcodeOrigin = getCpCodeLO(config.accountSwitchKey)
+        else:
+            cpcodeOrigin = getCpCodeLO()
+        formatOutputGeneric(cpcodeOrigin)
+
+    elif config.command == "contracts":
+        if hasattr(config, 'accountSwitchKey'):
+            contractInfo = getContracts(config.accountSwitchKey)
+        else:
+            contractInfo = getContracts()
+        formatOutputGeneric(contractInfo)
+
+    elif config.command == "list-cdns":
+        if hasattr(config, 'accountSwitchKey'):
+            cdnList = listCDNs(config.accountSwitchKey)
+        else:
+            cdnList = listCDNs()
+        formatOutputCDNList(cdnList, config.output_type)
+
+    elif config.command == "encoderlocations":
+        if hasattr(config, 'accountSwitchKey'):
+            encoderLocationsList = listEncoderLocations(config.accountSwitchKey)
+        else:
+            encoderLocationsList = listEncoderLocations()
+        formatOutputEncoderLocationsList(encoderLocationsList, config.output_type)
+
+    elif config.command == "vod-origins":
+        if hasattr(config, 'accountSwitchKey'):
+            vodOriginsList = listVODOrigins(config.accountSwitchKey,config.encoderLocation)
+        else:
+            vodOriginsList = listVODOrigins(config.encoderLocation)
+        formatOutputvodOriginsList(vodOriginsList, config.output_type)
+
+    elif config.command == "generate-key":
+        if hasattr(config, 'accountSwitchKey'):
+            key = generateKey(config.accountSwitchKey,config.key_type)
+        else:
+            key = generateKey(config.key_type)
+        formatOutputGeneric(key)
+
+    elif config.command == "cpcodes":
+        if hasattr(config, 'accountSwitchKey'):
+            cpcodes_list = listCPCodes(config.accountSwitchKey, config.type, config.unused)
+        else:
+            cpcodes_list = listCPCodes(config.type, config.unused)
+        formatOutputCPCodelist(cpcodes_list, config.output_type)
+
+    elif config.command == "create-origin":
+        print("Hello")
+        print(config.jsonLocation)
+        if hasattr(config, 'accountSwitchKey'):
+            createOriginResp = createLiveOrigin(config.accountSwitchKey, config.jsonLocation)
+        else:
+            createOriginResp = createLiveOrigin(config.jsonLocation)
+        formatOutputGeneric(createOriginResp)
+
+
+if __name__ == "__main__":
+    main()

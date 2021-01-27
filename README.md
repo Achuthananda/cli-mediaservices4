@@ -126,3 +126,144 @@ $ akamai msl4 list-groups --output-type json
 |  012-dn001-hgurudliveorigin.akamaiorigin.net  |   29184    |   933248   |      INDIA      | PROVISIONED  |
 +-----------------------------------------------+------------+------------+-----------------+--------------+
 ```
+#### Get Details of a particular stream.
+This shows the details of a stream.
+```
+$ akamai msl4 -c mediaservices get-stream 2018465
++-----------------+--------------------------------------------------------------+
+|       id        |                           2018465                            |
++-----------------+--------------------------------------------------------------+
+|      name       |                      achuth-teststream                       |
++-----------------+--------------------------------------------------------------+
+|     format      |                             HLS                              |
++-----------------+--------------------------------------------------------------+
+|     cpcode      |                            926793                            |
++-----------------+--------------------------------------------------------------+
+|     origin      |          008-dn001-acmpteststream1.akamaiorigin.net          |
++-----------------+--------------------------------------------------------------+
+|   createdDate   |                   2020-08-05T12:00:53.248Z                   |
++-----------------+--------------------------------------------------------------+
+|  modifiedDate   |                   2020-09-24T10:42:42.363Z                   |
++-----------------+--------------------------------------------------------------+
+|  storagecpcode  |                            940858                            |
++-----------------+--------------------------------------------------------------+
+|   encoderZone   |                          OTHER_APJ                           |
++-----------------+--------------------------------------------------------------+
+| primaryPublishi |   p-ep2018465.i.akamaientrypoint.net/2018465/(event_name)    |
+|      ngUrl      |                                                              |
++-----------------+--------------------------------------------------------------+
+| backupPublishin |  b-ep2018465.i.akamaientrypoint.net/2018465-b/(event_name)   |
+|      gUrl       |                                                              |
++-----------------+--------------------------------------------------------------+
+|   allowedIps    | ['52.47.171.50/32', '15.236.12.107/32', '15.236.243.99/32']  |
++-----------------+--------------------------------------------------------------+
+```
+
+#### Get Details of a particular stream in json format.
+This shows the details of a stream in json
+```
+$akamai msl4 -c mediaservices get-stream 2018465 -t json
+{
+  "id": 2018465,
+  "name": "achuth-teststream",
+  "format": "HLS",
+  "type": "MSL4",
+  "cpcode": 926793,
+  "ingestAccelerated": false,
+  "allowedIps": [
+    "52.47.171.50/32",
+    "15.236.12.107/32",
+    "15.236.243.99/32"
+  ],
+  "ingestOptions": {
+    "streamId": 2018465
+  },
+  "encoderZone": "OTHER_APJ",
+  "origin": {
+    "id": 34983,
+    "hostName": "008-dn001-acmpteststream1.akamaiorigin.net",
+    "cpcode": 933248
+  },
+  "primaryPreferredSettings": {
+    "preferredEps": [],
+    "preferredRegions": [],
+    "penalty": null,
+    "ignoreRestriction": null
+  },
+  "backupPreferredSettings": {
+    "preferredEps": [],
+    "preferredRegions": [],
+    "penalty": null,
+    "ignoreRestriction": null
+  },
+  "mapRule": 269,
+  "disableDuplicateEviction": false,
+  "events": [],
+  "createdDate": "2020-08-05T12:00:53.248Z",
+  "modifiedDate": "2020-09-24T10:42:42.363Z",
+  "createdBy": "apadmana",
+  "modifiedBy": "apadmana",
+  "provisionDetail": {
+    "streamId": 2018465,
+    "status": "PROVISIONED",
+    "message": "Provisioned"
+  },
+  "additionalEmailIds": [
+    "apadmana@akamai.com"
+  ],
+  "storageGroup": {
+    "cpcode": 940858
+  },
+  "primaryPublishingUrl": "p-ep2018465.i.akamaientrypoint.net/2018465/(event_name)",
+  "backupPublishingUrl": "b-ep2018465.i.akamaientrypoint.net/2018465-b/(event_name)",
+  "isDedicatedOrigin": false,
+  "tpsSettings": {
+    "inactiveOnly": true
+  },
+  "ingestLimitOverride": {}
+}
+
+```
+#### Get Details of a Live Origin.
+This shows the details of a live origin.
+```
+$akamai msl4 get-liveorigin --h
+usage: akamai msl4 get-liveorigin [-h] [--output-type json/text] originid
+
+positional arguments:
+  originid              Stream Id
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-type json/text, -t json/text
+                        Output type {json, text}. Default is text
+```
+```
+$akamai msl4 get-liveorigin 33183 -t text
++-----------------+--------------------------------------------------------------+
+|       id        |                            33183                             |
++-----------------+--------------------------------------------------------------+
+|      type       |                             MSL4                             |
++-----------------+--------------------------------------------------------------+
+|     cpcode      |                            933248                            |
++-----------------+--------------------------------------------------------------+
+|   encoderZone   |                         ASIA_PACIFIC                         |
++-----------------+--------------------------------------------------------------+
+| backupEncoderZo |                          AUSTRALIA                           |
+|       ne        |                                                              |
++-----------------+--------------------------------------------------------------+
+|    hostName     |           006-dn001-originshield.akamaiorigin.net            |
++-----------------+--------------------------------------------------------------+
+| backupHostName  |           010-dn001-originshield.akamaiorigin.net            |
++-----------------+--------------------------------------------------------------+
+|     status      |                         PROVISIONED                          |
++-----------------+--------------------------------------------------------------+
+|  activeVersion  |                              1                               |
++-----------------+--------------------------------------------------------------+
+|  amdProperties  |                              []                              |
++-----------------+--------------------------------------------------------------+
+|  modifiedDate   |                   2020-07-01T05:06:02.171Z                   |
++-----------------+--------------------------------------------------------------+
+|  activeVersion  |                              1                               |
++-----------------+--------------------------------------------------------------+
+```

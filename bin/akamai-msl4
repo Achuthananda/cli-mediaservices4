@@ -130,13 +130,29 @@ def main():
         formatOutputCPCodelist(cpcodes_list, config.output_type)
 
     elif config.command == "create-origin":
-        print("Hello")
-        print(config.jsonLocation)
         if hasattr(config, 'accountSwitchKey'):
-            createOriginResp = createLiveOrigin(config.accountSwitchKey, config.jsonLocation)
+            status,createOriginResp = createLiveOrigin(config.accountSwitchKey, config.originjsonFile)
         else:
-            createOriginResp = createLiveOrigin(config.jsonLocation)
-        formatOutputGeneric(createOriginResp)
+            status,createOriginResp = createLiveOrigin(config.originjsonFile)
+        if status == 202:
+            print("Origin Creation Request Accepted")
+
+    elif config.command == "create-stream":
+        if hasattr(config, 'accountSwitchKey'):
+            status,createStreamResp = createStream(config.accountSwitchKey, config.streamjsonFile)
+        else:
+            status,createStreamResp = createStream(config.streamjsonFile)
+        if status == 202:
+            print("Stream Creation Request Accepted")
+
+    elif config.command == "create-cpcode":
+        if hasattr(config, 'accountSwitchKey'):
+            status,cpCodeResp = createCPCode(config.accountSwitchKey, config.contract,config.cpcodeName)
+        else:
+            status,cpCodeResp = createCPCode(config.contract,config.cpcodeName)
+        if status == 201:
+            formatOutputGeneric(cpCodeResp)
+
 
 
 if __name__ == "__main__":

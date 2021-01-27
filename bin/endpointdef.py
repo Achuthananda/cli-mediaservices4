@@ -194,12 +194,42 @@ def listEncoderLocations(accountSwitchKey):
 
 def createLiveOrigin(accountSwitchKey, jsonLocation):
     createOriginEndPoint = '/config-media-live/v2/msl-origin/origins'
+    file = open(jsonLocation,'r')
+    originData = json.load(file)
+    originData = json.dumps(originData)
     if accountSwitchKey:
         params = {'accountSwitchKey': accountSwitchKey}
-        createOriginResp = prdHttpCaller.postFiles(createOriginEndPoint, jsonLocation,params)
+        status,createOriginResp = prdHttpCaller.postResult(createOriginEndPoint, originData,params)
     else:
-        createOriginResp = prdHttpCaller.postFiles(createOriginEndPoint,jsonLocation)
-    return createOriginResp
+        status,createOriginResp = prdHttpCaller.postResult(createOriginEndPoint,originData)
+    return status,createOriginResp
+
+def createStream(accountSwitchKey, jsonLocation):
+    createStreamEndPoint = '/config-media-live/v2/msl-origin/streams'
+    file = open(jsonLocation,'r')
+    streamData = json.load(file)
+    streamData = json.dumps(streamData)
+    if accountSwitchKey:
+        params = {'accountSwitchKey': accountSwitchKey}
+        status,createStreamResp = prdHttpCaller.postResult(createStreamEndPoint,streamData,params)
+    else:
+        status,createStreamResp = prdHttpCaller.postResult(createStreamEndPoint,streamData)
+    return status,createStreamResp
+
+def createCPCode(accountSwitchKey,contract,cpcodeName):
+    createCPCodePoint = '/config-media-live/v2/msl-origin/cpcodes'
+
+    cpCodeData = {}
+    cpCodeData["name"] = cpcodeName
+    cpCodeData["contractId"] = contract
+    cpCodeData= json.dumps(cpCodeData)
+
+    if accountSwitchKey:
+        params = {'accountSwitchKey': accountSwitchKey}
+        status,createCPCodeResp = prdHttpCaller.postResult(createCPCodePoint,cpCodeData,params)
+    else:
+        status,createCPCodeResp = prdHttpCaller.postResult(createCPCodePoint,cpCodeData)
+    return status,createCPCodeResp
 
 def listCPCodes(accountSwitchKey=None, type="INGEST", unused="true"):
     """ Get list of cpcodes """

@@ -92,10 +92,21 @@ class EdgeGridConfig():
 
         create_live_origin_parser = subparsers.add_parser(
             "create-origin", help="Create live origin.")
-        create_live_origin_parser.add_argument('jsonLocation', help="Location of the json", action='store')
+        create_live_origin_parser.add_argument('originjsonFile', help="Location of the json", action='store')
         create_live_origin_parser.add_argument('--output-type', '-t', default='text', choices=[
             'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
-        
+
+        createstream_parser = subparsers.add_parser(
+            "create-stream", help="Create live stream.")
+        createstream_parser.add_argument('streamjsonFile', help="Location of the json", action='store')
+        createstream_parser.add_argument('--output-type', '-t', default='text', choices=[
+            'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
+
+        createcpcode_parser = subparsers.add_parser(
+            "create-cpcode", help="Create a CP Code.")
+        createcpcode_parser.add_argument('--contract', '-m', help='Contract')
+        createcpcode_parser.add_argument('--cpcodeName', '-n', help='CP Code Name')
+
 
         get_cpcode_list_parser = subparsers.add_parser("cpcodes", help="Get list of CPcodes")
         get_cpcode_list_parser.add_argument('--type', default='INGEST', choices=[
@@ -106,7 +117,7 @@ class EdgeGridConfig():
             'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
 
 
-        get_cdn_list_parser = subparsers.add_parser("cdns", help="Get list of CDN's")
+        get_cdn_list_parser = subparsers.add_parser("cdns", help="Get list of CDNs")
         get_cdn_list_parser.add_argument('--output-type', '-t', default='text', choices=[
             'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
 

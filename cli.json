@@ -4,10 +4,10 @@
   },
   "commands": [
     {
-      "name": "mediaservices",
-      "aliases": ["ms"],
+      "name": "mediaservices4",
+      "aliases": ["msl4"],
       "version": "0.0.1",
-      "description": "An Akamai CLI package for Media Services "
+      "description": "An Akamai CLI package for Media Services 4 "
     }
   ]
 }

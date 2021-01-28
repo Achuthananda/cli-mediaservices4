@@ -248,3 +248,23 @@ def listCPCodes(accountSwitchKey=None, type="INGEST", unused="true"):
         }
         cpcodeList = prdHttpCaller.getResult(listcpcodeEndpoint, params)
     return cpcodeList
+
+def deleteStream(accountSwitchKey,streamId,purge):
+    deleteStreamEndPoint = '/config-media-live/v2/msl-origin/streams/{streamId}'.format(streamId=streamId)
+    params = {}
+    params["purgeContent"] = purge.lower()
+    if accountSwitchKey:
+        params['accountSwitchKey'] =  accountSwitchKey
+
+    status,deleteResp = prdHttpCaller.deleteResult(deleteStreamEndPoint,params)
+    return status
+
+def deleteOrigin(accountSwitchKey,originId):
+    deleteoriginEndPoint = '/config-media-live/v2/msl-origin/origins/{originId}'.format(originId=originId)
+
+    if accountSwitchKey:
+        params = {'accountSwitchKey': accountSwitchKey}
+        status,deleteOriginResp = prdHttpCaller.deleteResult(deleteoriginEndPoint,params)
+    else:
+        status,deleteOriginResp = prdHttpCaller.deleteResult(deleteoriginEndPoint)
+    return status

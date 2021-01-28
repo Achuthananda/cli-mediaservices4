@@ -80,6 +80,22 @@ def main():
             originInfo = getOrigin(config.originid)
         formatOutputOrigin(originInfo, config.output_type)
 
+    elif config.command == "delete-stream":
+        if hasattr(config, 'accountSwitchKey'):
+            status = deleteStream(config.accountSwitchKey, config.streamid,config.purge)
+        else:
+            status = deleteStream(config.streamid,config.purge)
+        if status == 200:
+            print("Stream Succesfully Deleted")
+
+    elif config.command == "delete-origin":
+        if hasattr(config, 'accountSwitchKey'):
+            status = deleteOrigin(config.accountSwitchKey, config.originid)
+        else:
+            status = deleteOrigin(config.originid)
+        if status == 202:
+            print("Origin Deletion Request Accepted")
+
     elif config.command == "cpcodes-liveorigin":
         if hasattr(config, 'accountSwitchKey'):
             cpcodeOrigin = getCpCodeLO(config.accountSwitchKey)

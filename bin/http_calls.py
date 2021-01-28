@@ -160,8 +160,8 @@ class EdgeGridHttpCaller():
         status = endpoint_result.status_code
         if self.verbose:
             print("LOG: DELETE %s %s %s" % (endpoint, status, endpoint_result.headers["content-type"]))
-        if status == 204:
-            return {}
+        if status == 204 or status == 200 or status == 202:
+            return status,{}
         if self.verbose:
             print(">>>\n" + json.dumps(endpoint_result.json(), indent=2) + "\n<<<\n")
-        return endpoint_result.json()
+        return status,endpoint_result.json()

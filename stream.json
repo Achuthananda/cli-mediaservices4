@@ -1,0 +1,25 @@
+{
+    "name": "climslDemo",
+    "contractId": "C-1IE2OHM",
+    "format": "HLS",
+    "cpcode": 933248,
+    "ingestAccelerated": false,
+    "encoderZone": "US_EAST",
+    "backupEncoderZone": "EUROPE",
+    "isDedicatedOrigin": false,
+    "activeArchiveDurationInDays": 2,
+    "allowedIps": [
+        "1.2.3.4"
+    ],
+    "additionalEmailIds": [
+        "apadmana@akamai.com"
+    ],
+    "origin": {
+        "hostName": "018-dn001-achuthmsl4cli123.akamaiorigin.net"
+    },
+    "streamAuth": {
+        "username": "ajones",
+        "password": "123abc!",
+        "algorithm": "SHA512"
+    }
+}

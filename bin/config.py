@@ -122,7 +122,6 @@ class EdgeGridConfig():
             'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
 
 
-
         get_cpcodeorigin_parser = subparsers.add_parser(
             "cpcodes-liveorigin", help="Get Available CP Codes For Live Origin.")
         get_cpcodeorigin_parser.add_argument('--output-type', '-t', default='text', choices=[
@@ -132,6 +131,16 @@ class EdgeGridConfig():
             "contracts", help="Fetch MSL Contracts")
         get_contracts_parser.add_argument('--output-type', '-t', default='text', choices=[
             'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
+
+        delete_stream_parser = subparsers.add_parser(
+            "delete-stream", help="Delete a MSL Stream")
+        delete_stream_parser.add_argument('streamid', help="Stream Id", action='store')
+        delete_stream_parser.add_argument('--purge', '-p', default='false', choices=[
+            'true', 'false'], metavar='true/false', help=' Purge Archived Content on Netstorage')
+
+        delete_origin_parser = subparsers.add_parser(
+            "delete-origin", help="Delete a MSL Origin")
+        delete_origin_parser.add_argument('originid', help="Stream Id", action='store')
 
 
         if flags:

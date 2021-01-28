@@ -338,7 +338,7 @@ $akamai msl4 generate-key -k AKAMAI
 
 #### Create the Stream
 This CLI creates the stream. It takes the stream settings as input in json file.
-Sample input can be found [here](https://github.com/akamai/cli)
+Sample input can be found [here](https://github.com/Achuthananda/cli-msl4/blob/master/stream.json)
 ```
 $akamai msl4 create-stream --h
 usage: akamai-msl4 create-stream [-h] [--output-type json/text] streamjsonFile
@@ -358,7 +358,7 @@ Stream Creation Request Accepted
 
 #### Create the Live Origin
 This CLI creates the Live Origin. It takes the origin settings as input in json file.
-Sample input can be found [here](https://github.com/akamai/cli)
+Sample input can be found [here](https://github.com/Achuthananda/cli-msl4/blob/master/origin.json)
 ```
 $:akamai msl4 create-origin --h
 usage: akamai msl4 create-origin [-h] [--output-type json/text] originjsonFile
@@ -462,4 +462,16 @@ $akamaimsl4 -c gss-mediaservices contracts
 +================================+=================+=================+
 |   Top-Level Group: C-1IE2OHM   |    C-1IE2OHM    |   B-C-1IE2OH8   |
 +--------------------------------+-----------------+-----------------+
+```
+
+#### Delete a Stream
+```
+$akamai msl4 -c gss-mediaservices delete-stream 2024791
+Stream Succesfully Deleted
+```
+
+#### Delete an Origin
+```
+$akamai msl4 -c gss-mediaservices delete-origin 41988
+Origin Deletion Request Accepted
 ```

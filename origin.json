@@ -1,0 +1,30 @@
+{
+    "contractId": "C-1IE2OHM",
+    "hostName": "itkc",
+    "cpcode": 933248,
+    "encoderZone": "US_EAST",
+    "backupEncoderZone": "EUROPE",
+    "emailIds": [
+        "test1@gmail.com",
+        "test2@akamai.com"
+    ],
+    "sharedKeys": [
+        {
+            "type": "AKAMAI",
+            "authMethod": "MSL_MULTI_ACCOUNT",
+            "name": "yt21",
+            "key": "77e274ds3327c3f03d",
+            "enabled": true
+        },
+        {
+            "type": "THIRD_PARTY",
+            "authMethod": "SIMPLE_AKAMAI_HEADER_VERIFICATION",
+            "name": "SomeName03",
+            "cdnCode": "dn00x",
+            "enabled": false,
+            "guid": "402254d3-e75e-4501-8709-5a3a2211f79",
+            "key": "h0BhBScF1Wb3y1r8clJqqg==",
+            "expiryDate": "2018-12-12T06:15:00.000Z"
+        }
+    ]
+}

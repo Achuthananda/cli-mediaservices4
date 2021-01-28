@@ -70,7 +70,7 @@ class EdgeGridConfig():
 
         get_origin_parser = subparsers.add_parser(
             "get-liveorigin", help="Get details of a MSL Live Origin")
-        get_origin_parser.add_argument('originid', help="Stream Id", action='store')
+        get_origin_parser.add_argument('originid', help="Origin Id", action='store')
         get_origin_parser.add_argument('--output-type', '-t', default='text', choices=[
             'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
 
@@ -100,6 +100,21 @@ class EdgeGridConfig():
             "create-stream", help="Create live stream.")
         createstream_parser.add_argument('streamjsonFile', help="Location of the json", action='store')
         createstream_parser.add_argument('--output-type', '-t', default='text', choices=[
+            'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
+
+
+        update_live_origin_parser = subparsers.add_parser(
+            "update-origin", help="Update live origin.")
+        update_live_origin_parser.add_argument('originId', help="Origin Id", action='store')
+        update_live_origin_parser.add_argument('originjsonFile', help="Location of the json", action='store')
+        update_live_origin_parser.add_argument('--output-type', '-t', default='text', choices=[
+            'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
+
+        updatestream_parser = subparsers.add_parser(
+            "update-stream", help="Update live stream.")
+        updatestream_parser.add_argument('streamId', help="Stream Id", action='store')
+        updatestream_parser.add_argument('streamjsonFile', help="Location of the json", action='store')
+        updatestream_parser.add_argument('--output-type', '-t', default='text', choices=[
             'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
 
         createcpcode_parser = subparsers.add_parser(

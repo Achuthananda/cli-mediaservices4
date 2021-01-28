@@ -216,6 +216,31 @@ def createStream(accountSwitchKey, jsonLocation):
         status,createStreamResp = prdHttpCaller.postResult(createStreamEndPoint,streamData)
     return status,createStreamResp
 
+
+def updateLiveOrigin(accountSwitchKey,originId,jsonLocation):
+    updateOriginEndPoint = '/config-media-live/v2/msl-origin/origins/{originId}'.format(originId=originId)
+    file = open(jsonLocation,'r')
+    originData = json.load(file)
+    originData = json.dumps(originData)
+    if accountSwitchKey:
+        params = {'accountSwitchKey': accountSwitchKey}
+        status,updateOriginResp = prdHttpCaller.putResult(updateOriginEndPoint,originData,params)
+    else:
+        status,updateOriginResp = prdHttpCaller.putResult(updateOriginEndPoint,originData)
+    return status,updateOriginResp
+
+def updateStream(accountSwitchKey,streamId,jsonLocation):
+    updateStreamEndPoint = '/config-media-live/v2/msl-origin/streams/{streamId}'.format(streamId=streamId)
+    file = open(jsonLocation,'r')
+    streamData = json.load(file)
+    streamData = json.dumps(streamData)
+    if accountSwitchKey:
+        params = {'accountSwitchKey': accountSwitchKey}
+        status,updateStreamResp = prdHttpCaller.putResult(updateStreamEndPoint,streamData,params)
+    else:
+        status,updateStreamResp = prdHttpCaller.putResult(updateStreamEndPoint,streamData)
+    return status,updateStreamResp
+
 def createCPCode(accountSwitchKey,contract,cpcodeName):
     createCPCodePoint = '/config-media-live/v2/msl-origin/cpcodes'
 

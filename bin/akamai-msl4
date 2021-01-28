@@ -161,6 +161,22 @@ def main():
         if status == 202:
             print("Stream Creation Request Accepted")
 
+    elif config.command == "update-origin":
+        if hasattr(config, 'accountSwitchKey'):
+            status,updateOriginResp = updateLiveOrigin(config.accountSwitchKey,config.originId,config.originjsonFile)
+        else:
+            status,updateOriginResp = updateLiveOrigin(config.originjsonFile)
+        if status == 202:
+            print("Origin Updation  Request Accepted")
+
+    elif config.command == "update-stream":
+        if hasattr(config, 'accountSwitchKey'):
+            status,updateStreamResp = updateStream(config.accountSwitchKey,config.streamId,config.streamjsonFile)
+        else:
+            status,updateStreamResp = updateStream(config.streamjsonFile)
+        if status == 202:
+            print("Stream Updation Request Accepted")
+
     elif config.command == "create-cpcode":
         if hasattr(config, 'accountSwitchKey'):
             status,cpCodeResp = createCPCode(config.accountSwitchKey, config.contract,config.cpcodeName)

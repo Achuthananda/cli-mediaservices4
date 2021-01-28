@@ -41,11 +41,15 @@ $akamai msl4 [global flags] Commands
 - `create-origin` —   Create live origin.
 - `create-stream` — Create live stream.
 - `create-cpcode` —   Create a CP Code..
+- `update-origin` - Update live origin.
+- `update-stream` - Update live stream.
 - `cpcodes` — Get list of CPcodes.
 - `cdns` —   Get list of CDNs
 - `create-stream` — Create live stream.
 - `cpcodes-liveorigin` —   Get Available CP Codes For Live Origin.
 - `contracts` — Fetch MSL Contracts
+- `delete-stream` - Delete a MSL Stream
+- `delete-origin` - Delete a MSL Origin
 
 ## Examples
 
@@ -56,13 +60,13 @@ $akamai msl4 --help
 usage: akamai msl4 [-h] [--verbose] [--debug] [--edgerc credentials_file]
                    [--section credentials_file_section]
                    [--accountSwitchKey Account Switch Key]
-                   {streams,get-stream,live-origins,get-liveorigin,encoderlocations,generate-key,vod-origins,create-origin,create-stream,create-cpcode,cpcodes,cdns,cpcodes-liveorigin,contracts}
+                   {streams,get-stream,live-origins,get-liveorigin,encoderlocations,generate-key,vod-origins,create-origin,create-stream,update-origin,update-stream,create-cpcode,cpcodes,cdns,cpcodes-liveorigin,contracts,delete-stream,delete-origin}
                    ...
 
 Process command line options.
 
 positional arguments:
-  {streams,get-stream,live-origins,get-liveorigin,encoderlocations,generate-key,vod-origins,create-origin,create-stream,create-cpcode,cpcodes,cdns,cpcodes-liveorigin,contracts}
+  {streams,get-stream,live-origins,get-liveorigin,encoderlocations,generate-key,vod-origins,create-origin,create-stream,update-origin,update-stream,create-cpcode,cpcodes,cdns,cpcodes-liveorigin,contracts,delete-stream,delete-origin}
                         commands
     streams             List all MSL Streams.
     get-stream          Get details of a MSL Stream.
@@ -73,11 +77,15 @@ positional arguments:
     vod-origins         Get list of VOD Origins.
     create-origin       Create live origin.
     create-stream       Create live stream.
+    update-origin       Update live origin.
+    update-stream       Update live stream.
     create-cpcode       Create a CP Code.
     cpcodes             Get list of CPcodes
-    cdns                Get list of CDN's
+    cdns                Get list of CDNs
     cpcodes-liveorigin  Get Available CP Codes For Live Origin.
     contracts           Fetch MSL Contracts
+    delete-stream       Delete a MSL Stream
+    delete-origin       Delete a MSL Origin
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -375,6 +383,18 @@ optional arguments:
 ```
 $akamai msl4 create-origin '/Users/apadmana/Desktop/temp/origin.json'
 Origin Creation Request Accepted
+```
+
+
+#### Update a Stream
+```
+$akamai -msl4 -c gss-mediaservices update-stream 2024066 '/Users/apadmana/temp/cli-msl4/udpatestream.json'
+Stream Updation Request Accepted
+```
+#### Update a Origin
+```
+$akamai msl4 -c gss-mediaservices update-origin 41991 '/Users/apadmana/temp/cli-msl4/updateorigin.json'
+Origin Updation  Request Accepted
 ```
 
 #### Create the CP Code

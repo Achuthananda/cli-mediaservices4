@@ -476,7 +476,7 @@ $akamai msl4 -c gss-mediaservices cpcodes-liveorigin
 
 #### Get the details of contracts in the account
 ```
-$akamaimsl4 -c gss-mediaservices contracts
+$akamai msl4 -c gss-mediaservices contracts
 +--------------------------------+-----------------+-----------------+
 |         Contract Name          |   Contract ID   |   Account ID    |
 +================================+=================+=================+

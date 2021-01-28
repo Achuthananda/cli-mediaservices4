@@ -85,14 +85,14 @@ def main():
             cpcodeOrigin = getCpCodeLO(config.accountSwitchKey)
         else:
             cpcodeOrigin = getCpCodeLO()
-        formatOutputGeneric(cpcodeOrigin)
+        formatOutputCPCodeLiveOrigin(cpcodeOrigin,config.output_type)
 
     elif config.command == "contracts":
         if hasattr(config, 'accountSwitchKey'):
             contractInfo = getContracts(config.accountSwitchKey)
         else:
             contractInfo = getContracts()
-        formatOutputGeneric(contractInfo)
+        formatOutputContract(contractInfo,config.output_type)
 
     elif config.command == "list-cdns":
         if hasattr(config, 'accountSwitchKey'):

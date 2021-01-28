@@ -125,9 +125,13 @@ class EdgeGridConfig():
 
         get_cpcodeorigin_parser = subparsers.add_parser(
             "cpcodes-liveorigin", help="Get Available CP Codes For Live Origin.")
+        get_cpcodeorigin_parser.add_argument('--output-type', '-t', default='text', choices=[
+            'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
 
         get_contracts_parser = subparsers.add_parser(
             "contracts", help="Fetch MSL Contracts")
+        get_contracts_parser.add_argument('--output-type', '-t', default='text', choices=[
+            'json', 'text'], metavar='json/text', help=' Output type {json, text}. Default is text')
 
 
         if flags:

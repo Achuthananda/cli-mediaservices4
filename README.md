@@ -267,3 +267,199 @@ $akamai msl4 get-liveorigin 33183 -t text
 |  activeVersion  |                              1                               |
 +-----------------+--------------------------------------------------------------+
 ```
+
+#### Get list of all available encoder locations.
+This shows the list of all available encoder locations.
+```
+$akamai msl4 encoderlocations
++---------------------------+
+|         Locations         |
++===========================+
+|          EUROPE           |
++---------------------------+
+|       NORTH_AMERICA       |
++---------------------------+
+|       LATIN_AMERICA       |
++---------------------------+
+|       SOUTH_AMERICA       |
++---------------------------+
+|          NORDICS          |
++---------------------------+
+|       ASIA_PACIFIC        |
++---------------------------+
+|      OTHER_AMERICAS       |
++---------------------------+
+|         OTHER_APJ         |
++---------------------------+
+|        OTHER_EMEA         |
++---------------------------+
+|          GERMANY          |
++---------------------------+
+|           INDIA           |
++---------------------------+
+|           ITALY           |
++---------------------------+
+|           JAPAN           |
++---------------------------+
+|          MEXICO           |
++---------------------------+
+|          TAIWAN           |
++---------------------------+
+|      UNITED_KINGDOM       |
++---------------------------+
+|          US_EAST          |
++---------------------------+
+|        US_CENTRAL         |
++---------------------------+
+|          US_WEST          |
++---------------------------+
+|         AUSTRALIA         |
++---------------------------+
+```
+
+#### Generate the key in both Akamai and Third Party format.
+This shows the list of all available encoder locations.
+```
+$ akamai msl4 generate-key --h
+usage: akamai-msl4 generate-key [-h] [--key-type AKAMAI/THIRD_PARTY]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --key-type AKAMAI/THIRD_PARTY, -k AKAMAI/THIRD_PARTY
+                        Key Type {AKAMAI,THIRD_PARTY}. Default is AKAMAI
+
+```
+```
+$akamai msl4 generate-key -k AKAMAI
+{
+  "key": "d3956c487sa63ba8842"
+}
+```
+
+#### Create the Stream
+This CLI creates the stream. It takes the stream settings as input in json file.
+Sample input can be found [here](https://github.com/akamai/cli)
+```
+$akamai msl4 create-stream --h
+usage: akamai-msl4 create-stream [-h] [--output-type json/text] streamjsonFile
+
+positional arguments:
+  streamjsonFile        Location of the json
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-type json/text, -t json/text
+                        Output type {json, text}. Default is text
+```
+```
+akamai msl4 create-stream '/Users/apadmana/Desktop/temp/stream.json'
+Stream Creation Request Accepted
+```
+
+#### Create the Live Origin
+This CLI creates the Live Origin. It takes the origin settings as input in json file.
+Sample input can be found [here](https://github.com/akamai/cli)
+```
+$:akamai msl4 create-origin --h
+usage: akamai msl4 create-origin [-h] [--output-type json/text] originjsonFile
+
+positional arguments:
+  originjsonFile        Location of the json
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output-type json/text, -t json/text
+                        Output type {json, text}. Default is text
+
+```
+```
+$akamai msl4 create-origin '/Users/apadmana/Desktop/temp/origin.json'
+Origin Creation Request Accepted
+```
+
+#### Create the CP Code
+This CLI creates the CP Code to use.
+```
+$akamai msl4 create-cpcode --h
+usage: akamai msl4 create-cpcode [-h] [--contract CONTRACT]
+                                [--cpcodeName CPCODENAME]
+
+optional arguments:
+ -h, --help            show this help message and exit
+ --contract CONTRACT, -m CONTRACT
+                       Contract
+ --cpcodeName CPCODENAME, -n CPCODENAME
+                       CP Code Name
+```
+```
+$akamai msl4 -c gss-mediaservices create-cpcode -m C-1IE2XHM -n streamcpcode1
+{
+  "id": 1142464,
+  "name": "streamcpcode1",
+  "contractId": "C-1IE2OHM"
+}
+```
+
+#### Get the list of CP Codes
+```
+$akamai msl4 -c gss-mediaservices cpcodes
++-----------------+------------------------------+----------------------+
+|     CPcode      |             Name             |      ContractId      |
++=================+==============================+======================+
+|     926793      |            509887            |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     940507      |             vebr             |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     940856      |           hgurudat           |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     954899      |  dk-livestream--lab-cpcode   |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     955302      |            858687            |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     955303      |           sabtest            |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     956550      |         adsilva-msl          |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     1049749     |           mguheMSL           |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+|     1057047     |           rysuzuk            |    ['C-1IE2OHM']     |
++-----------------+------------------------------+----------------------+
+```
+
+#### Get the list of CP Codes available for Live Origin
+```
+$akamai msl4 -c gss-mediaservices cpcodes-liveorigin
+[
+  {
+    "id": 933248,
+    "name": "jcl MSL4 lab",
+    "contracts": [
+      {
+        "contractId": "C-1IE2OHM"
+      }
+    ],
+    "contractIds": [
+      "C-1IE2OHM"
+    ]
+  }
+]
+```
+```
+$akamai msl4 -c gss-mediaservices cpcodes-liveorigin
++-----------------+----------------------+
+|     CPCode      |         Name         |
++=================+======================+
+|     933248      |     jcl MSL4 lab     |
++-----------------+----------------------+
+
+```
+
+#### Get the details of contracts in the account
+```
+$akamaimsl4 -c gss-mediaservices contracts
++--------------------------------+-----------------+-----------------+
+|         Contract Name          |   Contract ID   |   Account ID    |
++================================+=================+=================+
+|   Top-Level Group: C-1IE2OHM   |    C-1IE2OHM    |   B-C-1IE2OH8   |
++--------------------------------+-----------------+-----------------+
+```

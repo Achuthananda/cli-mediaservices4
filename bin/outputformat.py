@@ -126,6 +126,27 @@ def formatOutputOrigin(originInfo, output_type):
         print(MainParentTable)
 
 
+def formatOutputContract(contractInfo, output_type):
+    """ Formats the output on a given format (json or text) """
+    if output_type == "json":
+        # Let's print the JSON
+        print(json.dumps(contractInfo, indent=2))
+
+    if output_type == "text":
+        # Iterate over the dictionary and print the selected information
+        ParentTable = tt.Texttable()
+        ParentTable.set_cols_width([30,15, 15])
+        ParentTable.set_cols_align(['c','c','c'])
+        ParentTable.set_cols_valign(['m','m','m'])
+        Parentheader = ['Contract Name','Contract ID', 'Account ID']
+        ParentTable.header(Parentheader)
+        for my_item in contractInfo:
+            Parentrow = [my_item["contractName"], my_item["contractId"], my_item["accountId"]]
+            ParentTable.add_row(Parentrow)
+        MainParentTable = ParentTable.draw()
+        print(MainParentTable)
+
+
 def formatOutputEncoderLocationsList(encoderLocationsList,output_type):
     """ Formats the output on a given format (json or text) """
     if output_type == "json":
@@ -156,12 +177,29 @@ def formatOutputvodOriginsList(vodOriginsList, output_type):
         ParentTable.set_cols_valign(['m','m','m'])
         Parentheader = ['Name','CPCode', 'StreamCount']
         ParentTable.header(Parentheader)
-        for my_item in liveOriginList:
+        for my_item in vodOriginsList:
             Parentrow = [my_item["name"], my_item["cpcode"], my_item["streamCount"]]
             ParentTable.add_row(Parentrow)
         MainParentTable = ParentTable.draw()
         print(MainParentTable)
 
+def formatOutputCPCodeLiveOrigin(cpcodeOriginList, output_type):
+    """ Formats the output on a given format (json or text) """
+    if output_type == "json":
+        print(json.dumps(cpcodeOriginList, indent=2))
+    if output_type == "text":
+        # Iterate over the dictionary and print the selected information
+        ParentTable = tt.Texttable()
+        ParentTable.set_cols_width([15,20])
+        ParentTable.set_cols_align(['c','c'])
+        ParentTable.set_cols_valign(['m','m'])
+        Parentheader = ['CPCode','Name']
+        ParentTable.header(Parentheader)
+        for my_item in cpcodeOriginList:
+            Parentrow = [my_item["id"], my_item["name"]]
+            ParentTable.add_row(Parentrow)
+        MainParentTable = ParentTable.draw()
+        print(MainParentTable)
 
 def formatOutputCDNList(cdnList, output_type):
     """ Formats the output on a given format (json or text) """

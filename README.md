@@ -11,7 +11,7 @@ Please ensure your API client has access to the "Media Streaming" API.
 To install, use [Akamai CLI](https://github.com/akamai/cli):
 
 ```
-$akamai install https://github.com/Achuthananda/cli-msl4.git
+$akamai install https://github.com/Achuthananda/cli-mediaservices4.git
 ```
 
 You may also use this as a stand-alone command by cloning this repository
